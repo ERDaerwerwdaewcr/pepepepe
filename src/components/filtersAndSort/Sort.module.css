@@ -1,0 +1,28 @@
+.sort {
+  display: flex;
+  margin-top: 53px;
+  margin-left: 0px;
+  margin-right: 55px;
+}
+.triangle {
+  color: #2c2c2c;
+  width: 10px;
+  height: 5.625px;
+}
+.sortText {
+  font-weight: bold;
+  margin-left: 8px;
+  margin-right: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 1.5%;
+  color: #2c2c2c;
+}
+.sortType {
+  color: #fe5f1e;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1.5%;
+  text-decoration: underline dashed #fe5f1e;
+}
