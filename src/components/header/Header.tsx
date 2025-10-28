@@ -15,7 +15,7 @@ export const Header = () => {
         <div className={styles.hr} />
         <div className={styles.cartInfo}>
 
-          <img src="/public/iconfinder_shopping-cart_2561279 1.svg" alt="корзина" className={styles.name} />
+          <img src="/public/cart.svg" alt="корзина" className={styles.name} />
           <p className={styles.cartText}>10</p>
         </div>
       </div>

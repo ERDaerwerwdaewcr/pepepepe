@@ -1,9 +1,8 @@
 .pizzaCard {
-  /* margin-left: 67px; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 30px;
 }
 .name {
@@ -18,7 +17,6 @@
   height: 260px;
 }
 .dough {
-  /* background: #fff; */
   border-radius: 30px;
   margin: 5px 7px;
   display: flex;
@@ -51,7 +49,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
   margin-right: 36px;
 }
 .add {
@@ -61,9 +58,9 @@
   justify-content: center;
   align-items: center;
 
-  color: #eb5a1e;
+  color: var(--orange-border);
   border-radius: 30px;
-  border: 2px solid #eb5a1e;
+  border: 2px solid var(--orange-border);
   font-weight: 700;
   font-size: 16px;
 }

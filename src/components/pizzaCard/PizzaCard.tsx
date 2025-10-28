@@ -9,7 +9,7 @@ interface PizzaCardProps {
 export const PizzaCard = ({ name, price, img }: PizzaCardProps) => {
 
   return (
-    <div >
+    <div  >
       <div className={styles.pizzaCard} >
         <img className={styles.pizza} src={img} alt="" />
         <h2 className={styles.name} >{name}</h2>

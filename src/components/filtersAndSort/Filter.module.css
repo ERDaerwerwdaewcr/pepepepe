@@ -1,15 +1,10 @@
-.filterAndSort {
-  display: flex;
-  justify-content: space-between;
-}
 .filter {
   display: flex;
-  justify-content: space-between;
-  padding: 40px 67px;
+  align-items: center;
   gap: 9px;
 }
 .filterText {
-  background: #f9f9f9;
+  background: var(--light-gray);
   border-radius: 30px;
   padding: 15px;
   font-weight: 700;

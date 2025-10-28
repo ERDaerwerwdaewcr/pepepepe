@@ -1,0 +1,11 @@
+.filterAndSort {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+.filterBlock {
+  display: flex;
+  justify-content: space-between;
+  gap: 9px;
+}
