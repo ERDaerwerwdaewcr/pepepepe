@@ -1,6 +1,8 @@
 import { Sort } from "./Sort";
-import styles from './FilterdAndSort.module.css'
+import styles from './FilterdAndSort.module.scss'
 import { Filter } from "./Filter";
+import { useState } from "react";
+
 
 const pizzaType = [
   { id: 1, type: 'Все' },
@@ -12,13 +14,18 @@ const pizzaType = [
 ]
 
 export const FiltersAndSort = () => {
+  const [activePizzaType, setActivePizzaType] = useState(1);
+
   return (
     <div className={styles.filterAndSort}>
       <div className={styles.filterBlock}>
         {pizzaType.map((pizza) => (
           <Filter
             key={pizza.id}
+            id={pizza.id}
             type={pizza.type}
+            activeId={activePizzaType}
+            onClickType={setActivePizzaType}
           />
         ))}
       </div>

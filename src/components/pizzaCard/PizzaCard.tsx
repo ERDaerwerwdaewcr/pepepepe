@@ -1,32 +1,55 @@
-import styles from './PizzaCard.module.css'
+import styles from './PizzaCard.module.scss'
+import { useState } from 'react';
 
 interface PizzaCardProps {
-  name: string;
-  price: string;
-  img: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  types: string[];
+  sizes: number[];
 }
 
-export const PizzaCard = ({ name, price, img }: PizzaCardProps) => {
+export const PizzaCard = ({ title, price, imageUrl, types, sizes }: PizzaCardProps) => {
+  const [pizzaCount, setPizzaCount] = useState(0)
+  const [activeType, setActiveType] = useState(0)
+  const [activeSize, setActiveSize] = useState(0)
+
+  const onClickAdd = () => {
+    setPizzaCount(pizzaCount + 1)
+  }
 
   return (
     <div  >
       <div className={styles.pizzaCard} >
-        <img className={styles.pizza} src={img} alt="" />
-        <h2 className={styles.name} >{name}</h2>
+        <img className={styles.pizza} src={imageUrl} alt="" />
+        <h2 className={styles.name} >{title}</h2>
         <div className={styles.pizzaInfo}>
           <div className={styles.dough}>
-            <p>тонкое</p>
-            <p>традиционное</p>
-          </div >
+            {types.map((type, index) => (
+              <span
+                key={index}
+                onClick={() => setActiveType(index)}
+                className={activeType === index ? styles.active : ''}
+              >
+                {type}
+              </span>
+            ))}
+          </div>
           <div className={styles.size}>
-            <p>26см.</p>
-            <p>30см.</p>
-            <p>40см.</p>
+            {sizes.map((size, index) => (
+              <span key={index}
+                onClick={() => setActiveSize(index)}
+                className={activeSize === index ? styles.active : ''}
+              >{size} см.</span>
+            ))}
           </div>
         </div>
         <div className={styles.priceAdd}>
-          <h1 className={styles.price}>{price}</h1>
-          <p className={styles.add}>+ Добавить</p>
+          <h1 className={styles.price}>от {price} ₽ </h1>
+          <button onClick={onClickAdd} className={styles.add}>
+            <span >+ Добавить    </span>
+            <i> {pizzaCount}</i>
+          </button>
         </div>
       </div>
     </div>

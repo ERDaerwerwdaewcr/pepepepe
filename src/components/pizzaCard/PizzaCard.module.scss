@@ -63,4 +63,22 @@
   border: 2px solid var(--orange-border);
   font-weight: 700;
   font-size: 16px;
+
+  &:hover {
+    background-color: var(--orange);
+    color: var(--white);
+  }
+}
+button {
+  background-color: #fff;
+}
+span {
+  margin-right: 5px;
+}
+.active {
+  background: var(--white);
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: space-between;
 }

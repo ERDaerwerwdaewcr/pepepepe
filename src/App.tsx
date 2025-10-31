@@ -1,18 +1,19 @@
 import { Header } from "./components/header/Header"
-import styles from './main.module.css'
+import styles from './main.module.scss'
 import { PizzaCard } from "./components/pizzaCard/PizzaCard"
 import { FiltersAndSort } from "./components/filtersAndSort/FiltersAndSort"
+import pizzas from './assets/pizza.json'
 
-const pizzas = [
-  { id: 1, name: 'Чизбургер-пицца', price: 'от 395 ₽', img: "/public/chisburger.png" },
-  { id: 2, name: 'Сырная', price: 'от 450 ₽', img: "/public/cheese.png" },
-  { id: 3, name: 'Креветки по-азиатски', price: 'от 290 ₽', img: "/public/asia.png" },
-  { id: 4, name: 'Сырный цыпленок', price: 'от 385 ₽', img: "/public/chiken.png" },
-  { id: 5, name: 'Чизбургер-пицца', price: 'от 395 ₽', img: "/public/chisburger.png" },
-  { id: 6, name: 'Сырная', price: 'от 450 ₽', img: "/public/cheese.png" },
-  { id: 7, name: 'Креветки по-азиатски', price: 'от 290 ₽', img: "/public/asia.png" },
-  { id: 8, name: 'Сырный цыпленок', price: 'от 385 ₽', img: "/public/chiken.png" },
-]
+// const pizzas = [
+//   { id: 1, name: 'Чизбургер-пицца', price: 'от 395 ₽', img: "/public/chisburger.png" },
+//   { id: 2, name: 'Сырная', price: 'от 450 ₽', img: "/public/cheese.png" },
+//   { id: 3, name: 'Креветки по-азиатски', price: 'от 290 ₽', img: "/public/asia.png" },
+//   { id: 4, name: 'Сырный цыпленок', price: 'от 385 ₽', img: "/public/chiken.png" },
+//   { id: 5, name: 'Чизбургер-пицца', price: 'от 395 ₽', img: "/public/chisburger.png" },
+//   { id: 6, name: 'Сырная', price: 'от 450 ₽', img: "/public/cheese.png" },
+//   { id: 7, name: 'Креветки по-азиатски', price: 'от 290 ₽', img: "/public/asia.png" },
+//   { id: 8, name: 'Сырный цыпленок', price: 'от 385 ₽', img: "/public/chiken.png" },
+// ]
 
 
 
@@ -27,9 +28,11 @@ function App() {
           {pizzas.map((pizza) => (
             <PizzaCard
               key={pizza.id}
-              name={pizza.name}
+              title={pizza.title}
               price={pizza.price}
-              img={pizza.img}
+              imageUrl={pizza.imageUrl}
+              types={pizza.types}
+              sizes={pizza.sizes}
             />
           ))}
         </div>
