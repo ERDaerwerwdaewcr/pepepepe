@@ -5,18 +5,20 @@
 }
 .filterText {
   background: var(--light-gray);
+  color: var(--black);
   border-radius: 30px;
   padding: 15px;
   font-weight: 700;
   font-size: 16px;
   text-align: center;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
 }
 .active {
-  background: #282828;
+  background: var(--black);
   color: var(--white);
   border-radius: 30px;
   padding: 15px;
-  font-weight: 700;
-  font-size: 16px;
-  text-align: center;
 }

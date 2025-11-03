@@ -1,5 +1,7 @@
 import styles from './PizzaCard.module.scss'
 import { useState } from 'react';
+import clsx from 'clsx';
+
 
 interface PizzaCardProps {
   title: string;
@@ -10,12 +12,18 @@ interface PizzaCardProps {
 }
 
 export const PizzaCard = ({ title, price, imageUrl, types, sizes }: PizzaCardProps) => {
-  const [pizzaCount, setPizzaCount] = useState(0)
-  const [activeType, setActiveType] = useState(0)
-  const [activeSize, setActiveSize] = useState(0)
+  // const [pizzaCount, setPizzaCount] = useState(0)
+  // const [activeType, setActiveType] = useState(0)
+  // const [activeSize, setActiveSize] = useState(0)
+
+  const [pizzaState, setPizzaState] = useState({
+    count: 0,
+    activeType: 0,
+    activeSize: 0,
+  })
 
   const onClickAdd = () => {
-    setPizzaCount(pizzaCount + 1)
+    setPizzaState((prev) => ({ ...prev, count: prev.count + 1 }))
   }
 
   return (
@@ -28,8 +36,8 @@ export const PizzaCard = ({ title, price, imageUrl, types, sizes }: PizzaCardPro
             {types.map((type, index) => (
               <span
                 key={index}
-                onClick={() => setActiveType(index)}
-                className={activeType === index ? styles.active : ''}
+                onClick={() => setPizzaState((prev) => ({ ...prev, activeType: index }))}
+                className={clsx({ [styles.active]: pizzaState.activeType === index })}
               >
                 {type}
               </span>
@@ -38,8 +46,8 @@ export const PizzaCard = ({ title, price, imageUrl, types, sizes }: PizzaCardPro
           <div className={styles.size}>
             {sizes.map((size, index) => (
               <span key={index}
-                onClick={() => setActiveSize(index)}
-                className={activeSize === index ? styles.active : ''}
+                onClick={() => setPizzaState((prev) => ({ ...prev, activeSize: index }))}
+                className={clsx({ [styles.active]: pizzaState.activeSize === index })}
               >{size} см.</span>
             ))}
           </div>
@@ -48,7 +56,7 @@ export const PizzaCard = ({ title, price, imageUrl, types, sizes }: PizzaCardPro
           <h1 className={styles.price}>от {price} ₽ </h1>
           <button onClick={onClickAdd} className={styles.add}>
             <span >+ Добавить    </span>
-            <i> {pizzaCount}</i>
+            <i> {pizzaState.count}</i>
           </button>
         </div>
       </div>

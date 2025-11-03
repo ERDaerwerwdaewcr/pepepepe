@@ -1,4 +1,5 @@
 import styles from './Filter.module.scss'
+import clsx from 'clsx';
 
 
 interface FilterProps {
@@ -13,7 +14,7 @@ export const Filter = ({ id, type, activeId, onClickType }: FilterProps) => {
   return (
     <div className={styles.filter}>
       <p onClick={() => onClickType(id)}
-        className={activeId === id ? styles.active : styles.filterText}
+        className={clsx(styles.filterText, { [styles.active]: activeId === id })}
       >
         {type}
       </p>
