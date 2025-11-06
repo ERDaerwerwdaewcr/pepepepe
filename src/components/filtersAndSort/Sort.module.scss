@@ -36,7 +36,7 @@
   font-weight: 400;
   font-size: 14px;
   padding: 10px 14px;
-  background-color: rgba(214, 213, 212, 0.2);
+  background-color: var(--background-gray);
   border-radius: 20px;
   &:hover {
     cursor: pointer;
@@ -45,7 +45,7 @@
 
 .sortListActive {
   color: var(--orange);
-  background-color: rgba(227, 150, 77, 0.2);
+  background-color: var(--background-orange);
   font-weight: 700;
   font-size: 14px;
 }

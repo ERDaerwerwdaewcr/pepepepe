@@ -4,14 +4,14 @@ import clsx from 'clsx';
 
 
 
-
+const list = ['популярности', "цене", "алфавиту"]
 
 export const Sort = () => {
   const [open, setOpen] = useState(false)
   const [selected, setSelected] = useState(0)
-  const list = ['популярности', "цене", "алфавиту"]
 
-  const onClickListItem = (i) => {
+
+  const onClickListItem = (i: number) => {
     setSelected(i)
     setOpen(false)
   }

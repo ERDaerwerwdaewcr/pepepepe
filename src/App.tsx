@@ -2,22 +2,34 @@ import { Header } from "./components/header/Header"
 import styles from './main.module.scss'
 import { PizzaCard } from "./components/pizzaCard/PizzaCard"
 import { FiltersAndSort } from "./components/filtersAndSort/FiltersAndSort"
-import pizzas from './assets/pizza.json'
 
-// const pizzas = [
-//   { id: 1, name: 'Чизбургер-пицца', price: 'от 395 ₽', img: "/public/chisburger.png" },
-//   { id: 2, name: 'Сырная', price: 'от 450 ₽', img: "/public/cheese.png" },
-//   { id: 3, name: 'Креветки по-азиатски', price: 'от 290 ₽', img: "/public/asia.png" },
-//   { id: 4, name: 'Сырный цыпленок', price: 'от 385 ₽', img: "/public/chiken.png" },
-//   { id: 5, name: 'Чизбургер-пицца', price: 'от 395 ₽', img: "/public/chisburger.png" },
-//   { id: 6, name: 'Сырная', price: 'от 450 ₽', img: "/public/cheese.png" },
-//   { id: 7, name: 'Креветки по-азиатски', price: 'от 290 ₽', img: "/public/asia.png" },
-//   { id: 8, name: 'Сырный цыпленок', price: 'от 385 ₽', img: "/public/chiken.png" },
-// ]
-
-
+import { useEffect, useState } from "react"
+import { Skeleton } from "./components/pizzaCard/Skeleton"
+interface Pizza {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  types: string[];
+  sizes: number[];
+}
 
 function App() {
+
+  const [items, setItems] = useState<Pizza[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('https://690c81c7a6d92d83e84e0978.mockapi.io/api/v1/items')
+      .then((res) => {
+        return res.json()
+      })
+      .then((arr) => {
+        setItems(arr)
+        setIsLoading(false)
+      })
+  }, [])
+
   return (
     <>
       <div className={styles.app}>
@@ -25,16 +37,18 @@ function App() {
         <FiltersAndSort />
         <h1 className={styles.title}>Все пиццы</h1>
         <div className={styles.pizzaList}>
-          {pizzas.map((pizza) => (
-            <PizzaCard
-              key={pizza.id}
-              title={pizza.title}
-              price={pizza.price}
-              imageUrl={pizza.imageUrl}
-              types={pizza.types}
-              sizes={pizza.sizes}
-            />
-          ))}
+          {isLoading
+            ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+            : items.map((pizza) => (
+              <PizzaCard
+                key={pizza.id}
+                title={pizza.title}
+                price={pizza.price}
+                imageUrl={pizza.imageUrl}
+                types={pizza.types}
+                sizes={pizza.sizes}
+              />
+            ))}
         </div>
       </div>
 
