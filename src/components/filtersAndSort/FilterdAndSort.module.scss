@@ -3,9 +3,17 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 40px;
+
+  @media (max-width: 1440px) {
+    flex-direction: column-reverse;
+  }
 }
 .filterBlock {
   display: flex;
   justify-content: space-between;
   gap: 9px;
+  @media (max-width: 1260px) {
+    width: 100%;
+    overflow: auto;
+  }
 }

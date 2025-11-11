@@ -4,6 +4,13 @@
   justify-content: space-between;
   padding: 40px 0;
   border-bottom: 1px solid var(--light-border);
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    .shoppingСart {
+      margin-top: 20px;
+    }
+  }
 }
 
 .headerLogo {
@@ -57,4 +64,15 @@
 }
 .cartInfo {
   display: flex;
+}
+
+.headerLogo a,
+.shoppingСart a {
+  display: flex; /* теперь ссылка ведет себя как flex-контейнер */
+  align-items: center;
+  gap: 10px;
+  text-decoration: none; /* убирает подчеркивание */
+  color: inherit; /* сохраняет цвет текста */
+  width: 100%; /* чтобы занимала всю ширину блока */
+  height: 100%;
 }
