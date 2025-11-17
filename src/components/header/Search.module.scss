@@ -1,0 +1,23 @@
+.root {
+  position: relative;
+}
+.icon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.3;
+  position: absolute;
+  left: 14px;
+  top: 12px;
+}
+.item {
+  width: 300px;
+  border-radius: 10px;
+  font-size: 16px;
+  border: 1px solid var(--gray);
+  padding: 12px 20px;
+  padding-left: 45px;
+
+  &:focus {
+    border: 1px solid var(--orange);
+  }
+}

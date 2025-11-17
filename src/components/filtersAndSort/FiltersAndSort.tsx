@@ -1,21 +1,33 @@
 import { Sort } from "./Sort";
 import styles from './FilterdAndSort.module.scss'
 import { Filter } from "./Filter";
-import { useState } from "react";
 
+interface SortType {
+  name: string;
+  sortProperty: string;
+}
 
+interface FiltersAndSortProps {
+  filterId: number;
+  onClickFilter: (id: number) => void;
+  sortType: SortType;
+  onClickSort: (sort: SortType) => void;
+}
 const pizzaType = [
-  { id: 1, type: 'Все' },
-  { id: 2, type: 'Мясные' },
-  { id: 3, type: 'Вегетарианские' },
-  { id: 4, type: 'Гриль' },
-  { id: 5, type: 'Острые' },
-  { id: 6, type: 'Закрытые' },
+  { id: 0, type: 'Все' },
+  { id: 1, type: 'Мясные' },
+  { id: 2, type: 'Вегетарианские' },
+  { id: 3, type: 'Гриль' },
+  { id: 4, type: 'Острые' },
+  { id: 5, type: 'Закрытые' },
 ]
 
-export const FiltersAndSort = () => {
-  const [activePizzaType, setActivePizzaType] = useState(1);
-
+export const FiltersAndSort: React.FC<FiltersAndSortProps> = ({
+  filterId,
+  onClickFilter,
+  sortType,
+  onClickSort,
+}) => {
   return (
     <div className={styles.filterAndSort}>
       <div className={styles.filterBlock}>
@@ -24,12 +36,15 @@ export const FiltersAndSort = () => {
             key={pizza.id}
             id={pizza.id}
             type={pizza.type}
-            activeId={activePizzaType}
-            onClickType={setActivePizzaType}
+            filterId={filterId}
+            onClickType={onClickFilter}
           />
         ))}
       </div>
-      <Sort />
+      <Sort
+        sortType={sortType}
+        onClickSort={onClickSort}
+      />
     </div>
   );
 };

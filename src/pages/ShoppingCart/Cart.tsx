@@ -1,6 +1,6 @@
 import styles from './Cart.module.scss'
 import { Link } from 'react-router-dom'
-import { ReactComponent as CartIcon } from '../../assets/cart.svg';
+import CartIcon from '../../assets/cartIcon.svg?react';
 export const Cart = () => {
   return (
     <div className={styles.container}>

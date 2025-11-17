@@ -1,11 +1,5 @@
 .sort {
   display: flex;
-
-  @media (max-width: 1260px) {
-    p {
-      display: none;
-    }
-  }
 }
 .triangle {
   color: var(--dark-gray);

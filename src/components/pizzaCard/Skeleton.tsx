@@ -13,7 +13,7 @@ export const Skeleton = () => (
 
   >
     <circle cx="125" cy="125" r="125" />
-    <rect x="0" y="NaN" rx="0" ry="0" width="220" height="NaN" />
+    <rect x="0" y="250" rx="0" ry="0" width="220" height="0" />
     <rect x="0" y="323" rx="0" ry="0" width="270" height="85" />
     <rect x="0" y="418" rx="20" ry="20" width="88" height="40" />
     <rect x="125" y="418" rx="19" ry="19" width="140" height="40" />
