@@ -4,30 +4,35 @@ import { Cart } from "./pages/ShoppingCart/Cart";
 import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
 import {
-  BrowserRouter,
-  RouterProvider,
+  // BrowserRouter,
+  // RouterProvider,
   Route,
-  Link,
+  // Link,
   Routes,
 } from "react-router-dom";
-import { CartEmpty } from "./pages/ShoppingCart/CartEmpty";
+// import { CartEmpty } from "./pages/ShoppingCart/CartEmpty";
+import { useState } from "react";
+import { SearchContext } from "./context/SearchContext";
 
 
 function App() {
 
+  const [searchValue, setSearchValue] = useState('')
+
   return (
-    <BrowserRouter>
-      <div className={styles.app}>
+
+    <div className={styles.app}>
+      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
         <Header />
         <Routes>
           <Route path="" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+      </SearchContext.Provider>
+    </div>
 
-      </div>
 
-    </BrowserRouter>
   )
 }
 

@@ -33,11 +33,13 @@
 }
 
 .sortList {
+  margin-top: 10px;
   font-weight: 400;
   font-size: 14px;
   padding: 10px 14px;
   background-color: var(--background-gray);
   border-radius: 20px;
+  position: absolute;
   &:hover {
     cursor: pointer;
   }

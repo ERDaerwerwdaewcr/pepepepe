@@ -2,7 +2,9 @@ import styles from './Header.module.scss'
 import { Link } from 'react-router-dom'
 import { Search } from './Search'
 
+
 export const Header = () => {
+
   return (
     <div className={styles.header}>
       <div className={styles.headerLogo}>

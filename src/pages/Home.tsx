@@ -1,30 +1,31 @@
 import styles from '../main.module.scss'
 import { PizzaCard } from "../components/pizzaCard/PizzaCard"
 import { FiltersAndSort } from "../components/filtersAndSort/FiltersAndSort"
-import { useEffect, useState } from "react"
+import { useEffect, useContext } from "react"
 import { Skeleton } from "../components/pizzaCard/Skeleton"
+import { Pagination } from '../components/Pagination/Pagination'
+import { SearchContext } from '../context/SearchContext'
+import { usePizzas } from '../hooks/usePizzas'
 
-interface SortType {
-  name: string;
-  sortProperty: string;
-}
-interface Pizza {
-  id: number;
-  title: string;
-  price: number;
-  imageUrl: string;
-  types: string[];
-  sizes: number[];
-}
+
 export const Home = () => {
 
-  const [items, setItems] = useState<Pizza[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [filterId, setFilterId] = useState<number>(0)
-  const [sortType, setSortType] = useState<SortType>({
-    name: 'популярности',
-    sortProperty: 'rating',
-  })
+  const {
+    items,
+    setItems,
+    isLoading,
+    setIsLoading,
+    filterId,
+    setFilterId,
+    sortType,
+    setSortType,
+    currentPage,
+    setCurrentPage
+  } = usePizzas();
+
+  const searchContext = useContext(SearchContext);
+  const searchValue = searchContext?.searchValue ?? '';
+
 
 
   useEffect(() => {
@@ -32,17 +33,28 @@ export const Home = () => {
     const categoryParam = filterId === 0 ? '' : `category=${filterId}`;
     const sortBy = sortType.sortProperty.replace('-', '')
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
-    fetch(`https://690c81c7a6d92d83e84e0978.mockapi.io/api/v1/items?${categoryParam}&sortby=${sortBy}&order=${order}`)
-      .then((res) => {
-        return res.json()
-      })
-      .then((arr) => {
-        setItems(arr)
-        setIsLoading(false)
+    const search = searchValue ? `&search=${searchValue}` : ''
 
+    const linkPizza = 'https://690c81c7a6d92d83e84e0978.mockapi.io/api/v1/'
+    fetch(`${linkPizza}items?page=${currentPage}&limit=4&${categoryParam}&sortby=${sortBy}&order=${order}${search}`).then((res) => {
+      if (!res.ok) {
+
+        return [];
+      }
+      return res.json();
+    })
+      .then((arr) => {
+        setItems(arr);
+        setIsLoading(false);
       })
-    window.scrollTo(0, 0)
-  }, [filterId, sortType])
+      .catch(() => {
+        // На всякий случай
+        setItems([]);
+        setIsLoading(false);
+      });
+
+    window.scrollTo(0, 0);
+  }, [filterId, sortType, searchValue, currentPage]);
 
   return (
     < div >
@@ -50,7 +62,7 @@ export const Home = () => {
         filterId={filterId}
         onClickFilter={(i: number) => setFilterId(i)}
         sortType={sortType}
-        onClickSort={(i: number) => setSortType(i)}
+        onClickSort={(obj) => setSortType(obj)}
       />
       <h1 className={styles.title}>Все пиццы</h1>
       <div className={styles.pizzaList}>
@@ -67,6 +79,7 @@ export const Home = () => {
             />
           ))}
       </div>
+      <Pagination onChangePage={(page: number) => setCurrentPage(page)} />
     </div>
   );
 };
