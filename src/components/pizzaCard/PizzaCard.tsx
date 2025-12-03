@@ -1,9 +1,11 @@
 import styles from './PizzaCard.module.scss'
 import { useState } from 'react';
 import clsx from 'clsx';
-
-
+import { addItem } from '../../redux/slices/cartSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 interface PizzaCardProps {
+  count?: number;
+  id: number;
   title: string;
   price: number;
   imageUrl: string;
@@ -11,20 +13,40 @@ interface PizzaCardProps {
   sizes: number[];
 }
 
-export const PizzaCard = ({ title, price, imageUrl, types, sizes }: PizzaCardProps) => {
-  // const [pizzaCount, setPizzaCount] = useState(0)
-  // const [activeType, setActiveType] = useState(0)
-  // const [activeSize, setActiveSize] = useState(0)
-
+export const PizzaCard = ({ id, title, price, imageUrl, types, sizes }: PizzaCardProps) => {
   const [pizzaState, setPizzaState] = useState({
     count: 0,
     activeType: 0,
     activeSize: 0,
   })
+  const uniqueId = `${id}_${pizzaState.activeType}_${pizzaState.activeSize}`;
 
+
+  // const [pizzaCount, setPizzaCount] = useState(0)
+  // const [activeType, setActiveType] = useState(0)
+  // const [activeSize, setActiveSize] = useState(0)
+  const dispatch = useAppDispatch()
   const onClickAdd = () => {
-    setPizzaState((prev) => ({ ...prev, count: prev.count + 1 }))
+    const item = {
+      id: uniqueId,
+      title,
+      price,
+      imageUrl,
+      type: pizzaState.activeType,
+      size: pizzaState.activeSize,
+      types,
+      sizes,
+    };
+    dispatch(addItem(item))
   }
+  const cartItem = useAppSelector((state) => {
+    return state.cartSlice.items.find((obj) => obj.id === uniqueId)
+  }
+
+  );
+  const addedCount = cartItem ? cartItem.count : 0
+
+
 
   return (
     <div  >
@@ -56,7 +78,8 @@ export const PizzaCard = ({ title, price, imageUrl, types, sizes }: PizzaCardPro
           <h1 className={styles.price}>от {price} ₽ </h1>
           <button onClick={onClickAdd} className={styles.add}>
             <span >+ Добавить    </span>
-            <i> {pizzaState.count}</i>
+            <i> {addedCount}</i>
+
           </button>
         </div>
       </div>

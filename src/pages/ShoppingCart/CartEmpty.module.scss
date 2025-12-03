@@ -30,5 +30,11 @@
     font-size: 16px;
     border-radius: 30px;
     padding: 15px 45px;
+
+    &:hover {
+      background: var(--orange);
+      color: var(--white);
+      border: var(--orange);
+    }
   }
 }

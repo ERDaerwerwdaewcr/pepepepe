@@ -1,47 +1,54 @@
 import styles from './Sort.module.scss'
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { setSort } from '../../redux/slices/filterSlice';
+
+import { SortList } from './SortOptions'
 
 interface SortType {
   name: string;
   sortProperty: string;
 }
 
-interface SortProps {
-  sortType: SortType;
-  onClickSort: (sort: SortType) => void;
-}
+export const Sort = () => {
+  const sortRef = useRef()
+  const dispatch = useDispatch()
+  const sort = useSelector((state: any) => state.filterSlice.sort)
 
-const list: SortType[] = [
-  { name: "популярности (возрастание)", sortProperty: '-rating' },
-  { name: "популярности (убывание)", sortProperty: 'rating' },
-  { name: "цене (возрастание)", sortProperty: '-price' },
-  { name: "цене (убывание)", sortProperty: 'price' },
-  { name: "алфавиту (возрастание)", sortProperty: '-title' },
-  { name: "алфавиту (убывание)", sortProperty: 'title' },
-]
-
-export const Sort: React.FC<SortProps> = ({ sortType, onClickSort }) => {
   const [open, setOpen] = useState(false)
   // const [selected, setSelected] = useState(0)
 
 
   const onClickListItem = (obj: SortType) => {
-    onClickSort(obj)
+    dispatch(setSort(obj))
     setOpen(false)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setOpen(false)
+      }
+    }
+    document.body.addEventListener('click', handleClickOutside)
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <div className={styles.sort}>
+    <div ref={sortRef} className={styles.sort}>
       <img className={styles.triangle} src="/public/triangle.svg" alt="" />
       <p className={styles.sortText}>Cортировка по </p>
       <div className={styles.sortColumn}>
-        <span onClick={() => setOpen(!open)} className={styles.sortType}>{sortType.name}</span>
+        <span onClick={() => setOpen(!open)} className={styles.sortType}>{sort.name}</span>
         {open && (
           <div className={styles.sortList}>
-            {list.map((obj: SortType, i: number) => (
-              <p key={i} onClick={() => onClickListItem(obj)} className={clsx({ [styles.sortListActive]: sortType.sortProperty === obj.sortProperty })}>{obj.name}</p>
+            {SortList.map((obj: SortType, i: number) => (
+              <p key={i} onClick={() => onClickListItem(obj)} className={clsx({ [styles.sortListActive]: sort.sortProperty === obj.sortProperty })}>{obj.name}</p>
 
             ))}
 

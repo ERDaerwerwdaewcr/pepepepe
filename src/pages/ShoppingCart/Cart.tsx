@@ -1,7 +1,26 @@
 import styles from './Cart.module.scss'
 import { Link } from 'react-router-dom'
 import CartIcon from '../../assets/cartIcon.svg?react';
+import { CartItem } from './CartItem';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { clearItems } from '../../redux/slices/cartSlice';
+import { CartEmpty } from './CartEmpty';
+
+
+
 export const Cart = () => {
+  const dispatch = useAppDispatch()
+  const { items, totalPrice } = useAppSelector((state) => state.cartSlice)
+  const totalCount = items.reduce((sum: number, item) => sum + item.count, 0)
+  const onClickClear = () => {
+    if (window.confirm('Удалить все товары из корзины?')) {
+      dispatch(clearItems())
+    }
+  }
+
+  if (!totalPrice) {
+    return <CartEmpty />
+  }
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -9,38 +28,25 @@ export const Cart = () => {
           <CartIcon className={styles.basket} />
           <h1>Корзина</h1>
         </div>
-        <div className={styles.trash}>
+        <div onClick={onClickClear} className={styles.trash}>
           <img className={styles.trashBox} src="/public/trash.svg" alt="" />
           <p>Очистить корзину</p>
         </div>
       </div>
       <div>
-        <div className={styles.line}></div>
-        <div className={styles.pizzaItem}>
-          <div className={styles.pizzaType}>
-            <img className={styles.pizza} src="https://media.dodostatic.net/image/r:1875x1875/0198bf2cc87a79baa946c53b634615f4.avif" alt="" />
-            <div className={styles.pizzaInfo} >
-              <h2>Цыпленок барбекю</h2>
-              <p>тонкое тесто, 26см</p>
-            </div>
-          </div>
-          <div className={styles.pizzaNum}>
-            <img src="/public/min.png" alt="" />
-            <h2>2</h2>
-            <img src="/public/plus.png" alt="" />
-          </div>
-          <h2 className={styles.pizzaPrice} >770 ₽ </h2>
-          <img className={styles.delete} src="/public/delete.png" alt="" />
-        </div>
+        <div className={styles.line} />
+        {items.map((item) => (
+          <CartItem key={item.id} {...item} />
+        ))}
       </div>
       <div className={styles.orderInfo}>
         <div className={styles.pizzaAll} >
           <p>Всего пицц: </p>
-          <h3>3шт.</h3>
+          <h3>{totalCount} шт.</h3>
         </div>
         <div className={styles.order}>
           <p> Сумма заказа: </p>
-          <h3>900 ₽</h3>
+          <h3>{totalPrice} ₽</h3>
         </div>
       </div>
       <div className={styles.end}>

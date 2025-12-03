@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-interface SortType {
-  name: string;
-  sortProperty: string;
-}
+// interface SortType {
+//   name: string;
+//   sortProperty: string;
+// }
 
 interface Pizza {
   id: number;
@@ -17,23 +17,23 @@ interface Pizza {
 export const usePizzas = () => {
   const [items, setItems] = useState<Pizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filterId, setFilterId] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortType, setSortType] = useState<SortType>({
-    name: 'популярности',
-    sortProperty: 'rating',
-  });
+  // const [filterId, setFilterId] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [sortType, setSortType] = useState<SortType>({
+  //   name: 'популярности',
+  //   sortProperty: 'rating',
+  // });
 
   return {
     items,
     setItems,
     isLoading,
     setIsLoading,
-    filterId,
-    setFilterId,
-    sortType,
-    setSortType,
-    currentPage,
-    setCurrentPage,
+    // filterId,
+    // setFilterId,
+    // sortType,
+    // setSortType,
+    // currentPage,
+    // setCurrentPage,
   };
 };

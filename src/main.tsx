@@ -8,9 +8,13 @@ import {
   // Route,
   // Link,
 } from "react-router-dom";
+import { store } from './redux/store.tsx';
+import { Provider } from 'react-redux'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 )

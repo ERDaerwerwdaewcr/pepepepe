@@ -1,4 +1,6 @@
 import styles from './CartEmpty.module.scss'
+import { Link } from 'react-router-dom'
+
 
 export const CartEmpty = () => {
   return (
@@ -8,7 +10,9 @@ export const CartEmpty = () => {
         <br />
         Для того, чтобы заказать пиццу, перейди на главную страницу.</p>
       <img src="/public/empty-basket.png" alt="" />
-      <button>Вернуться назад</button>
+      <Link to="/">
+        <button >Вернуться назад</button>
+      </Link>
     </div>
   );
 };

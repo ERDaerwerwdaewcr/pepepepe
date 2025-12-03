@@ -2,16 +2,16 @@ import { Sort } from "./Sort";
 import styles from './FilterdAndSort.module.scss'
 import { Filter } from "./Filter";
 
-interface SortType {
-  name: string;
-  sortProperty: string;
-}
+// interface SortType {
+//   name: string;
+//   sortProperty: string;
+// }
 
 interface FiltersAndSortProps {
   filterId: number;
   onClickFilter: (id: number) => void;
-  sortType: SortType;
-  onClickSort: (sort: SortType) => void;
+  // sortType: SortType;
+  // onClickSort: (sort: SortType) => void;
 }
 const pizzaType = [
   { id: 0, type: 'Все' },
@@ -25,8 +25,8 @@ const pizzaType = [
 export const FiltersAndSort: React.FC<FiltersAndSortProps> = ({
   filterId,
   onClickFilter,
-  sortType,
-  onClickSort,
+  // sortType,
+  // onClickSort,
 }) => {
   return (
     <div className={styles.filterAndSort}>
@@ -42,8 +42,8 @@ export const FiltersAndSort: React.FC<FiltersAndSortProps> = ({
         ))}
       </div>
       <Sort
-        sortType={sortType}
-        onClickSort={onClickSort}
+      // sortType={sortType}
+      // onClickSort={onClickSort}
       />
     </div>
   );
