@@ -13,7 +13,7 @@ export const Cart = () => {
   const { items, totalPrice } = useAppSelector((state) => state.cartSlice)
   const totalCount = items.reduce((sum: number, item) => sum + item.count, 0)
   const onClickClear = () => {
-    if (window.confirm('Удалить все товары из корзины?')) {
+    if (confirm('Удалить все товары из корзины?')) {
       dispatch(clearItems())
     }
   }

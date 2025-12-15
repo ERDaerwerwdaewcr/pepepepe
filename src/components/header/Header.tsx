@@ -2,12 +2,23 @@ import styles from './Header.module.scss'
 import { Link } from 'react-router-dom'
 import { Search } from './Search'
 import { useAppSelector } from '../../redux/store';
+import { useEffect, useRef } from 'react';
 
 
 export const Header = () => {
 
   const { items, totalPrice } = useAppSelector((state) => state.cartSlice)
   const totalCount = items.reduce((sum: number, item) => sum + item.count, 0)
+  const isMounted = useRef(false)
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items)
+      localStorage.setItem('cart', json)
+    }
+    isMounted.current = true
+  }, [items])
+
   return (
     <div className={styles.header}>
       <div className={styles.headerLogo}>

@@ -5,17 +5,17 @@ import { useState } from 'react';
 //   sortProperty: string;
 // }
 
-interface Pizza {
-  id: number;
-  title: string;
-  price: number;
-  imageUrl: string;
-  types: string[];
-  sizes: number[];
-}
+// interface Pizza {
+//   id: number;
+//   title: string;
+//   price: number;
+//   imageUrl: string;
+//   types: string[];
+//   sizes: number[];
+// }
 
 export const usePizzas = () => {
-  const [items, setItems] = useState<Pizza[]>([]);
+  // const [items, setItems] = useState<Pizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   // const [filterId, setFilterId] = useState(0);
   // const [currentPage, setCurrentPage] = useState(1);
@@ -25,8 +25,8 @@ export const usePizzas = () => {
   // });
 
   return {
-    items,
-    setItems,
+    // items,
+    // setItems,
     isLoading,
     setIsLoading,
     // filterId,

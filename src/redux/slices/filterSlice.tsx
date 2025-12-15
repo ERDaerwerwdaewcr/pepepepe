@@ -8,6 +8,7 @@ export interface CounterState {
     name: string;
     sortProperty: string;
   };
+  searchValue: string
 }
 
 const initialState: CounterState = {
@@ -16,7 +17,8 @@ const initialState: CounterState = {
   sort: {
     name: 'популярности',
     sortProperty: 'rating',
-  }
+  },
+  searchValue: '',
 }
 
 const filterSlice = createSlice({
@@ -31,11 +33,14 @@ const filterSlice = createSlice({
     },
     setPageCount(state, action) {
       state.pageCount = action.payload
+    },
+    setSearchValue(state, action) {
+      state.searchValue = action.payload
     }
   },
 })
 
-export const { setFilterId, setSort, setPageCount } = filterSlice.actions
+export const { setFilterId, setSort, setPageCount, setSearchValue } = filterSlice.actions
 
 export default filterSlice.reducer
 

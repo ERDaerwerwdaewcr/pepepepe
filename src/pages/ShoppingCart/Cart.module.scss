@@ -30,9 +30,14 @@
 .trash {
   display: flex;
   color: var(--gray);
+
   p {
     font-weight: 400;
     font-size: 16px;
+  }
+  &:hover {
+    cursor: pointer;
+    opacity: 0, 6;
   }
 }
 .trashBox {
@@ -160,4 +165,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.iconBtn {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }

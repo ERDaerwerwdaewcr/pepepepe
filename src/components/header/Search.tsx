@@ -1,32 +1,33 @@
 import styles from './Search.module.scss'
 import SearchIcon from '/src/assets/searchIcon.svg?react'
 import Clear from '/src/assets/clear.svg?react'
-import { useContext, useRef, useCallback, useState } from 'react';
-import { SearchContext } from '../../context/SearchContext';
-import debounce from 'lodash.debounce'
+import { useRef, useCallback, useState } from 'react';
+// import { SearchContext } from '../../context/SearchContext';
+import { debounce } from '../../utils/debounce';
+import { useAppDispatch } from '../../redux/store';
+import { setSearchValue } from '../../redux/slices/filterSlice';
 
 export const Search = () => {
-  const [value, setValue] = useState('')
-  const { setSearchValue } = useContext(SearchContext)
+  const dispatch = useAppDispatch();
 
+  const [value, setValue] = useState('')
   const updateSearchValue = useCallback(
     debounce((str: string) => {
-      setSearchValue(str)
+      dispatch(setSearchValue(str));
     }, 1000),
-    [],
+    [dispatch]
+  );
 
-  )
-
-  const onChangeInput = event => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
     updateSearchValue(event.target.value)
   }
 
-  const inputRef = useRef()
+  const inputRef = useRef<HTMLInputElement>(null)
   const onClickClear = () => {
-    setSearchValue('')
+    dispatch(setSearchValue(''))
     setValue('')
-    inputRef.current.focus()
+    inputRef.current?.focus()
   }
   return (
     <div className={styles.root}>

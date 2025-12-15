@@ -7,7 +7,7 @@ interface PaginationProps {
 }
 
 export const Pagination = ({ value, onChangePage }: PaginationProps) => {
-  const handlePageClick = useCallback((e) => {
+  const handlePageClick = useCallback((e: { selected: number }) => {
     onChangePage(e.selected + 1);
   }, [onChangePage]);
 

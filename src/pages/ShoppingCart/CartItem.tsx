@@ -2,8 +2,9 @@ import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice';
 import { useAppDispatch } from '../../redux/store';
 import styles from './Cart.module.scss'
 
+
 interface CartItemProps {
-  id: string;
+  id: number;
   title: string;
   price: number;
   imageUrl: string;
@@ -50,10 +51,19 @@ export const CartItem = ({
           <p>{types[type]}, {sizes[size]} см</p>
         </div>
       </div>
-      <div className={styles.pizzaNum}>
-        <img onClick={onClickMinus} src='/public/min.png' alt="" />
+      <div
+        className={styles.pizzaNum}>
+        <button
+          onClick={onClickMinus}
+          disabled={count === 1}
+          className={styles.iconBtn}
+        >
+          <img src="/public/min.png" alt="minus" />
+        </button>
         <h2>{count}</h2>
-        <img onClick={onClickPlus} src="/public/plus.png" alt="" />
+        <button onClick={onClickPlus} className={styles.iconBtn}>
+          <img src="/public/plus.png" alt="plus" />
+        </button>
       </div>
       <h2 className={styles.pizzaPrice} >{price * count} </h2>
       <img onClick={onClickRemove} className={styles.delete} src="/public/delete.png" alt="" />
